@@ -22,6 +22,7 @@ module.exports = {
 		static: {
 			directory: path.join(__dirname, 'dist'),
 		},
+		watchFiles: ['src/**/*'],
 		compress: true,
 		port: 9000,
 	},
