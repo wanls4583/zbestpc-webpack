@@ -18,16 +18,29 @@ module.exports = {
 	},
 	module: {
 		rules: [{
-			test: /\.css$/,
-			use: [{
-					loader: MiniCssExtractPlugin.loader,
-					//options: {
-					//	publicPath: path.resolve(__dirname, 'dist/css/')
-					//}
+				test: /\.css$/,
+				use: [{
+						loader: MiniCssExtractPlugin.loader,
+						//options: {
+						//	publicPath: path.resolve(__dirname, 'dist/css/')
+						//}
+					},
+					'css-loader'
+				]
+			},
+			{
+				test: /\.png$|\.jpg$|\.gif$/,
+				type: 'asset',
+				parser: {
+					dataUrlCondition: {
+						maxSize: 4 * 1024 // 小于4KB的图片会使用base64
+					}
 				},
-				'css-loader'
-			]
-		}]
+				generator: {
+					filename: 'images/[name]-[hash:6][ext][query]'
+				}
+			}
+		]
 	},
 	optimization: {
 		minimize: true,
