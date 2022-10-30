@@ -8,13 +8,22 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const {
 	CleanWebpackPlugin
 } = require('clean-webpack-plugin');
+
 module.exports = {
+	mode: 'development',
 	entry: {
 		'index': path.resolve(__dirname, 'src/index.js')
 	},
 	output: {
 		path: path.resolve(__dirname, 'dist'),
 		filename: '[name].js'
+	},
+	devServer: {
+		static: {
+			directory: path.join(__dirname, 'dist'),
+		},
+		compress: true,
+		port: 9000,
 	},
 	module: {
 		rules: [{
