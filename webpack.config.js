@@ -12,11 +12,12 @@ const {
 module.exports = {
 	mode: 'development',
 	entry: {
-		'index': path.resolve(__dirname, 'src/index.js')
+		'index': path.resolve(__dirname, 'src/index.js'),
+		'login': path.resolve(__dirname, 'src/login.js')
 	},
 	output: {
 		path: path.resolve(__dirname, 'dist'),
-		filename: '[name].js'
+		filename: 'js/[name]/[name].js'
 	},
 	devServer: {
 		static: {
@@ -47,7 +48,8 @@ module.exports = {
 					}
 				},
 				generator: {
-					filename: 'images/[name]-[hash:6][ext][query]'
+					//filename: 'images/[name]-[hash:6][ext][query]',
+					filename: 'img/[name][ext][query]',
 				}
 			}
 		]
@@ -64,12 +66,12 @@ module.exports = {
 			cacheGroups: {
 				jquery: {
 					test: /[\\/]jquery\.js/,
-					name: 'jquery',
+					filename: 'js/jquery.js',
 					chunks: 'all',
 				},
 				flexslider: {
 					test: /[\\/]jquery\.flexslider\.js/,
-					name: 'flexslider',
+					filename: 'js/flexslider.js',
 					chunks: 'all',
 				}
 			},
@@ -78,12 +80,17 @@ module.exports = {
 	plugins: [
 		new UglifyJsWebpackPlugin(),
 		new MiniCssExtractPlugin({
-			filename: '[name].css'
+			filename: 'css/[name]/[name].css'
 		}),
 		new HtmlWebpackPlugin({
 			template: path.resolve(__dirname, 'src/index.html'),
 			filename: 'index.html',
 			chunks: ['index']
+		}),
+		new HtmlWebpackPlugin({
+			template: path.resolve(__dirname, 'src/login.html'),
+			filename: 'login.html',
+			chunks: ['login']
 		}),
 		new CopyWebpackPlugin({
 			patterns: [{
