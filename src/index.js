@@ -1,19 +1,14 @@
-import './css/public.css';
-import './css/index.css';
+import './assets/css/public.css';
+import './assets/css/index.css';
 
 import 'flexslider';
 
-import './js/public.js';
-import './js/nav.js';
+import './modjs/public.js';
+import './modjs/nav.js';
 
-$(function() {
-	$('#home_slider').flexslider({
-		animation: 'slide',
-		controlNav: true,
-		directionNav: true,
-		animationLoop: true,
-		slideshow: true,
-		slideshowSpeed: 2000,
-		useCSS: false
-	});
-});
+import {
+	createApp
+} from 'vue';
+import Index from './index/index.vue';
+
+createApp(Index).mount('#app');

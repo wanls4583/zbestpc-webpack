@@ -5,6 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerWebpackPlugin = require('css-minimizer-webpack-plugin');
 const UglifyJsWebpackPlugin = require('uglifyjs-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const VueLoaderPlugin = require('vue-loader').VueLoaderPlugin;
 const {
 	CleanWebpackPlugin
 } = require('clean-webpack-plugin');
@@ -29,6 +30,10 @@ module.exports = {
 	},
 	module: {
 		rules: [{
+				test: /\.vue$/,
+				use: ['vue-loader']
+			},
+			{
 				test: /\.css$/,
 				use: [{
 						loader: MiniCssExtractPlugin.loader,
@@ -83,18 +88,18 @@ module.exports = {
 			filename: 'css/[name]/[name].css'
 		}),
 		new HtmlWebpackPlugin({
-			template: path.resolve(__dirname, 'src/index.html'),
+			template: path.resolve(__dirname, 'public/index.html'),
 			filename: 'index.html',
 			chunks: ['index']
 		}),
 		new HtmlWebpackPlugin({
-			template: path.resolve(__dirname, 'src/login.html'),
+			template: path.resolve(__dirname, 'public/index.html'),
 			filename: 'login.html',
 			chunks: ['login']
 		}),
 		new CopyWebpackPlugin({
 			patterns: [{
-				from: path.resolve(__dirname, 'src/img'),
+				from: path.resolve(__dirname, 'src/assets/img'),
 				to: path.resolve(__dirname, 'dist/img')
 			}]
 		}),
@@ -102,6 +107,7 @@ module.exports = {
 			$: 'jquery',
 			jQuery: 'jquery',
 		}),
-		new CleanWebpackPlugin()
+		new CleanWebpackPlugin(),
+		new VueLoaderPlugin()
 	]
 }
