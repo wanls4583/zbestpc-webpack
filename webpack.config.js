@@ -57,6 +57,23 @@ module.exports = {
 		minimizer: [
 			new CssMinimizerWebpackPlugin()
 		],
+		splitChunks: {
+			//chunks: 'all',
+			//filename: 'vendor.js',
+			minSize: 100 * 1024,
+			cacheGroups: {
+				jquery: {
+					test: /[\\/]jquery\.js/,
+					name: 'jquery',
+					chunks: 'all',
+				},
+				flexslider: {
+					test: /[\\/]jquery\.flexslider\.js/,
+					name: 'flexslider',
+					chunks: 'all',
+				}
+			},
+		}
 	},
 	plugins: [
 		new UglifyJsWebpackPlugin(),
